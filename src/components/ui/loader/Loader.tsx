@@ -1,8 +1,8 @@
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export function Loader() {
   return (
-    <m.svg
+    <motion.svg
       xmlns="http://www.w3.org/2000/svg"
       width="64"
       height="64"
@@ -11,7 +11,7 @@ export function Loader() {
       animate={{ rotate: 360 }}
       transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
     >
-      <m.circle
+      <motion.circle
         cx="32"
         cy="32"
         r="28"
@@ -21,7 +21,7 @@ export function Loader() {
         animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.1, 1] }}
         transition={{ repeat: Infinity, duration: 1.3, ease: "easeInOut" }}
       />
-      <m.circle
+      <motion.circle
         cx="32"
         cy="32"
         r="14"
@@ -31,6 +31,6 @@ export function Loader() {
         animate={{ scale: [1, 1.1, 1] }}
         transition={{ repeat: Infinity, duration: 1.3, ease: "easeInOut" }}
       />
-    </m.svg>
+    </motion.svg>
   );
 }
