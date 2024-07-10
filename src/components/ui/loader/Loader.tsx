@@ -1,11 +1,26 @@
 import { motion } from 'framer-motion';
 
-export function Loader() {
+// Define a type for the sizes object
+type LoaderSizes = {
+  [key: string]: number;
+};
+
+export function Loader({ size = 'md' }: { size?: string }) {
+  // Define size mappings
+  const sizes: LoaderSizes = {
+    sm: 32,
+    md: 64,
+    lg: 128,
+  };
+
+  // Set the size based on the prop, defaulting to 'md' if not provided
+  const loaderSize = sizes[size] || sizes['md'];
+
   return (
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"
-      width="64"
-      height="64"
+      width={loaderSize}
+      height={loaderSize}
       viewBox="0 0 64 64"
       fill="none"
       animate={{ rotate: 360 }}

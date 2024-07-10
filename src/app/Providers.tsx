@@ -1,15 +1,25 @@
-'use client'
+"use client";
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ThemeProvider } from "@/components/theme-provider";
+import { PropsWithChildren, useState } from "react";
 
-import { PropsWithChildren, useState } from 'react'
+export function Providers({ children }: PropsWithChildren) {
+  const [client] = useState(new QueryClient());
 
-export function Providers({children}: PropsWithChildren){
-    const [client] = useState(new QueryClient())
-
-    return <QueryClientProvider client={client}>
+  return (
+    <QueryClientProvider client={client}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        enableSystem
+        disableTransitionOnChange
+      >
         {children}
-        <ReactQueryDevtools initialIsOpen={false}/>
-    </QueryClientProvider>  
+      </ThemeProvider>
+
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 }

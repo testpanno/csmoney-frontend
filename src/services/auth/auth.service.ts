@@ -16,10 +16,10 @@ class AuthService {
 			data
 		)
 
-		console.log(response.data)
+		
 
 		if (response.data.accessToken) {
-			console.log('got token')
+		
 			saveTokenStorage(response.data.accessToken)
 			saveRefreshTokenStorage(response.data.refreshToken)
 		}

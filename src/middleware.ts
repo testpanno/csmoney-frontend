@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { EnumTokens } from './services/auth/auth.helper'
 import authService from './services/auth/auth.service'
 import { ITokenInside } from './services/auth/auth.types'
-import { UserRole } from './types'
 
 export async function middleware(request: NextRequest, response: NextResponse) {
 	const refreshToken = request.cookies.get(EnumTokens.REFRESH_TOKEN)?.value

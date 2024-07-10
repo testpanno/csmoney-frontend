@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Fira_Mono, Inter } from "next/font/google";
-import "./globals.scss";
+import "../../public/globals.css";
 import { Providers } from "./Providers";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Fira_Mono({ subsets: ["cyrillic", "latin"], weight: "400" });
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
           {children}
