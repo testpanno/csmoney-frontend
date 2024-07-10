@@ -3,7 +3,6 @@ import { axiosClassic, instance } from '@/api/axios'
 import { IAuthFormData, IUser } from '@/types'
 import { EnumTokens, getAccessToken, removeFromStorage, saveRefreshTokenStorage, saveTokenStorage } from './auth.helper'
 
-
 interface IAuthResponse {
 	accessToken: string
 	refreshToken: string
@@ -15,8 +14,6 @@ class AuthService {
 			`/auth/${type}`,
 			data
 		)
-
-		
 
 		if (response.data.accessToken) {
 		

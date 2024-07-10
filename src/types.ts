@@ -12,6 +12,15 @@ export interface IUser {
 	is_superuser: boolean
 }
 
+export interface ISteamAuth {
+	id: number
+	user_ip: string
+	created_at: string
+	steam_id: string
+	username: string
+	domain_id: number
+}
+
 export interface IAuthFormData extends Pick<IUser, 'email'> {
 	password: string
 }
