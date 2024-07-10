@@ -1,10 +1,11 @@
 import { axiosClassic, instance } from '@/api/axios'
 
 import { IAuthFormData, IUser } from '@/types'
-import { removeFromStorage, saveTokenStorage } from './auth.helper'
+import { EnumTokens, removeFromStorage, saveRefreshTokenStorage, saveTokenStorage } from './auth.helper'
 
 interface IAuthResponse {
 	accessToken: string
+	refreshToken: string
 }
 
 class AuthService {
@@ -17,6 +18,8 @@ class AuthService {
 		if (response.data.accessToken) {
 			console.log('got token')
 			saveTokenStorage(response.data.accessToken)
+			saveRefreshTokenStorage(response.data.refreshToken)
+			
 		}
 
 		return response
@@ -38,7 +41,7 @@ class AuthService {
 			{},
 			{
 				headers: {
-					Authorization: `Bearer ${refreshToken}`,
+					Cookie: `refreshToken=${refreshToken}`,
 				},
 			}
 		)

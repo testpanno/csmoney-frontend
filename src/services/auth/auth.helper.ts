@@ -20,6 +20,16 @@ export const saveTokenStorage = (accessToken: string) => {
 }
 
 
+export const saveRefreshTokenStorage = (refreshToken: string) => {
+
+	Cookies.set(EnumTokens.REFRESH_TOKEN, refreshToken, {
+		domain: 'localhost',
+		sameSite: 'strict',
+		expires: 1,
+	})
+}
+
+
 export const removeFromStorage = () => {
 	Cookies.remove(EnumTokens.ACCESS_TOKEN)
 }
