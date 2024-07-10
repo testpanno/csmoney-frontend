@@ -5,7 +5,6 @@ import { removeFromStorage, saveTokenStorage } from './auth.helper'
 
 interface IAuthResponse {
 	accessToken: string
-	user: IUser
 }
 
 class AuthService {
@@ -15,14 +14,17 @@ class AuthService {
 			data
 		)
 
-		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+		if (response.data.accessToken) {
+			console.log('got token')
+			saveTokenStorage(response.data.accessToken)
+		}
 
 		return response
 	}
 
 	async getNewTokens() {
 		const response = await axiosClassic.post<IAuthResponse>(
-			'/auth/login/refresh'
+			'/auth/refresh'
 		)
 
 		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
@@ -32,11 +34,11 @@ class AuthService {
 
 	async getNewTokensByRefresh(refreshToken: string) {
 		const response = await axiosClassic.post<IAuthResponse>(
-			'/auth/login/refresh',
+			'/auth/refresh',
 			{},
 			{
 				headers: {
-					Cookie: `refreshToken=${refreshToken}`,
+					Authorization: `Bearer ${refreshToken}`,
 				},
 			}
 		)

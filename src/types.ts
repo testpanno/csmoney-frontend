@@ -5,11 +5,11 @@ export enum UserRole {
 
 export interface IUser {
 	id: number
-	name?: string
+	username?: string
 	email: string
 	avatarUrl?: string
 	country?: string
-	role: UserRole
+	is_superuser: boolean
 }
 
 export interface IAuthFormData extends Pick<IUser, 'email'> {
