@@ -1,39 +1,47 @@
-import { saveTokenStorage } from '@/services/auth/auth.helper'
+import { getAccessToken, saveTokenStorage } from '@/services/auth/auth.helper'
 import authService from '@/services/auth/auth.service'
 import { transformUserToState } from '@/utils/transform-user-to-state'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
 export function useProfile() {
-	const { data, isLoading } = useQuery({
-		queryKey: ['profile'],
-		queryFn: () => authService.profile(),
-		refetchInterval: 1800000, // 30 minutes in milliseconds
-	})
 
-	const { isSuccess, data: dataTokens } = useQuery({
-		queryKey: ['new tokens'],
-		queryFn: () => authService.getNewTokens(),
-		enabled: !data?.data,
-	})
+    const queryClient = useQueryClient();
 
-	useEffect(() => {
-		if (!isSuccess) return
+	// Fetch new tokens if necessary
+    const { data: accessToken, isSuccess: isTokensSuccess, isLoading: isTokensLoading } = useQuery({
+        queryKey: ['new tokens'],
+        queryFn: () => getAccessToken(),
+    });
 
-		if (dataTokens.data.accessToken)
-			saveTokenStorage(dataTokens.data.accessToken)
-	}, [isSuccess])
+    // Save new tokens to storage
+    useEffect(() => {
+        if (isTokensSuccess && accessToken) {
+            saveTokenStorage(accessToken);
 
-	const profile = data?.data
+            queryClient.invalidateQueries({
+                queryKey: ['profile']
+            });
+        }
+    }, [isTokensSuccess, accessToken]);
 
-	const userState = profile ? transformUserToState(profile) : null
+    // Fetch profile data after tokens are fetched and saved
+    const { data: profileData, isLoading: isProfileLoading } = useQuery({
+        queryKey: ['profile'],
+        queryFn: () => authService.profile(),
+        enabled: isTokensSuccess, // Enable fetching profile only if tokens are successfully fetched and saved
+    });
+ 
+	const profile = profileData?.data;
 
-	return {
-		isLoading,
+    const userState = profile ? transformUserToState(profile) : null;
 
-		user: {
-			...profile,
-			...userState,
-		},
-	}
+    return {
+        isLoading: isProfileLoading || isTokensLoading,
+        user: {
+        ...profile,
+        ...userState, 
+        },  
+    };
 }
+ 

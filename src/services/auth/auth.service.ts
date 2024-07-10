@@ -1,7 +1,8 @@
 import { axiosClassic, instance } from '@/api/axios'
 
 import { IAuthFormData, IUser } from '@/types'
-import { EnumTokens, removeFromStorage, saveRefreshTokenStorage, saveTokenStorage } from './auth.helper'
+import { EnumTokens, getAccessToken, removeFromStorage, saveRefreshTokenStorage, saveTokenStorage } from './auth.helper'
+
 
 interface IAuthResponse {
 	accessToken: string
@@ -15,11 +16,12 @@ class AuthService {
 			data
 		)
 
+		console.log(response.data)
+
 		if (response.data.accessToken) {
 			console.log('got token')
 			saveTokenStorage(response.data.accessToken)
 			saveRefreshTokenStorage(response.data.refreshToken)
-			
 		}
 
 		return response
@@ -50,8 +52,10 @@ class AuthService {
 	}
 
 	async logout() {
-		const response = await axiosClassic.post<boolean>('/auth/logout')
 
+
+		const response = await axiosClassic.post<boolean>('/auth/logout')
+		
 		if (response.data) removeFromStorage()
 
 		return response
