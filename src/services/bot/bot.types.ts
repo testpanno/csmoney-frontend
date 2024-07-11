@@ -15,4 +15,5 @@ export interface IBotResponse {
     id: string
     name: string
     status: string
+    port: number
 }

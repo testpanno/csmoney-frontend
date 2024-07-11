@@ -6,6 +6,7 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { IBotResponse } from "@/services/bot/bot.types";
 import { useBotMutations } from '@/hooks/useBotMutations';
+import { BotCreateForm } from "./BotCreateForm";
 
 export default function BotManager() {
   const {
@@ -31,12 +32,14 @@ export default function BotManager() {
         <Button variant="outline" onClick={() => refetchBotsData()}>
           {isBotsFetching ? <Loader size="sm" /> : "Обновить Ботов"}
         </Button>
+        <BotCreateForm></BotCreateForm>
       </div>
       {isBotsLoading ? (
         <div className="w-full flex items-center justify-center">
           <Loader />
         </div>
       ) : (
+
         <DataTable columns={columns} data={BotData} />
       )}
     </div>

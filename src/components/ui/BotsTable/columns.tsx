@@ -27,6 +27,10 @@ export const columns: ColumnDef<IBotResponse>[] = [
     header: 'Название',
   },
   {
+    accessorKey: 'port',
+    header: 'Порт',
+  },
+  {
     accessorKey: 'status',
     header: 'Статус',
     cell: ({ row }) => (
@@ -55,13 +59,13 @@ export const columns: ColumnDef<IBotResponse>[] = [
 
       return (
         <div className="flex gap-2">
-          <Button size="sm" variant="destructive" onClick={handleStop} disabled={isStopPending}>
+          <Button size="sm" variant="outline" onClick={handleStop} disabled={isStopPending}>
             {isStopPending ? <Loader size="sm"/> : 'Остановить'}
           </Button>
           <Button size="sm" onClick={handleRestart} disabled={isRestartPending}>
             {isRestartPending ? <Loader size="sm"/> : 'Перезапустить'}
           </Button>
-          <Button size="sm" variant="outline" onClick={handleDelete} disabled={isDeletePending}>
+          <Button size="sm" variant="destructive" onClick={handleDelete} disabled={isDeletePending}>
             {isDeletePending ? <Loader size="sm"/> : 'Удалить'}
           </Button>
         </div>

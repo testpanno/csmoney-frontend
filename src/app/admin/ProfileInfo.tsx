@@ -22,18 +22,11 @@ export function ProfileInfo() {
 	return (
 		user && (
 			<div className='mb-8 flex gap-5'>
-				{user.avatarUrl && (
-					<Image src={user.avatarUrl} alt='Avatar' width={100} height={100} />
-				)}
-				<div>
-					<h2 className='text-2xl font-bold'>Добрый день!</h2>
-					<p className='text-lg'>Ваш email: {user.email}</p>
-					<p className='text-lg'>Роль: {user.is_superuser ? 'Admin' : 'Worker'}</p>
-
-					<Button onClick={() => mutateLogout()} disabled={isLogoutPending}>
-						<LogOut />
-					</Button>
-				</div>
+				
+				<Button onClick={() => mutateLogout()} disabled={isLogoutPending}>
+					<LogOut />
+				</Button>
+				
 			</div>
 		)
 	)

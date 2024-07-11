@@ -29,6 +29,10 @@ class SteamBotService {
   async getAll() {
     return axiosBot.get<IBotResponse[]>(`/list-bots`);
   }
+
+  async getLogs(container_id: string) {
+    return axiosBot.get<IBotResponse[]>(`/get-logs?container_id=${container_id}`);
+  }
 }
 
 export default new SteamBotService();
