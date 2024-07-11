@@ -27,7 +27,22 @@ export const columns: ColumnDef<ISteamAuth>[] = [
   {
     accessorKey: 'created_at',
     header: 'Дата',
-    cell: ({ row }) => new Date(row.getValue("created_at")).toLocaleDateString(),
+    cell: ({ row }) => {
+      const createdAt: string = row.getValue("created_at");
+      if (!createdAt) return '';
+  
+      const options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      };
+
+      // @ts-ignore
+      return new Date(createdAt).toLocaleString('ru-RU', options);
+    },
   },
   {
     accessorKey: 'steam_id',

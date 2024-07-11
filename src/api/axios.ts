@@ -1,4 +1,4 @@
-import { API_URL } from '@/constants/main.constants'
+import { API_URL, BOT_API_URL } from '@/constants/main.constants'
 import { getAccessToken, removeFromStorage } from '@/services/auth/auth.helper'
 import authService from '@/services/auth/auth.service'
 import axios, { CreateAxiosDefaults } from 'axios'
@@ -10,8 +10,18 @@ const axiosOptions: CreateAxiosDefaults = {
 	withCredentials: true,
 }
 
-export const axiosClassic = axios.create(axiosOptions)
+const axiosBotOptions: CreateAxiosDefaults = {
+	baseURL: BOT_API_URL,
+	headers: {
+	  ...getContentType(),
+	}, 
+	withCredentials: true,
+};
 
+
+export const axiosBot = axios.create(axiosBotOptions)
+
+export const axiosClassic = axios.create(axiosOptions)
 export const instance = axios.create(axiosOptions)
 
 instance.interceptors.request.use(config => {

@@ -21,6 +21,19 @@ export interface ISteamAuth {
 	domain_id: number
 }
 
+export interface ISteamLog {
+	id: number
+	created_at: string
+	offer_id: string
+	skins: string
+	total_price: number
+	status: string
+	target_steam_id: string
+	bot_steam_id: string
+	hold: string
+}
+
+
 export interface IAuthFormData extends Pick<IUser, 'email'> {
 	password: string
 }

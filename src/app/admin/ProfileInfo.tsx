@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { useProfile } from '@/hooks/useProfile'
 import authService from '@/services/auth/auth.service'
 import { useMutation } from '@tanstack/react-query'
@@ -29,9 +30,9 @@ export function ProfileInfo() {
 					<p className='text-lg'>Ваш email: {user.email}</p>
 					<p className='text-lg'>Роль: {user.is_superuser ? 'Admin' : 'Worker'}</p>
 
-					<button onClick={() => mutateLogout()} disabled={isLogoutPending}>
+					<Button onClick={() => mutateLogout()} disabled={isLogoutPending}>
 						<LogOut />
-					</button>
+					</Button>
 				</div>
 			</div>
 		)

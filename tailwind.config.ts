@@ -24,6 +24,14 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        success: {
+          DEFAULT: '#28a745', // Bootstrap success color
+          foreground: '#ffffff', // Text color
+        },
+        warning: {
+          DEFAULT: '#ffc107', // Bootstrap warning color
+          foreground: '#ffffff', // Text color
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

@@ -58,10 +58,10 @@ export function DataTable<TData, TValue>({
         <Input
           placeholder="Поиск по steamid64..."
           value={
-            (table.getColumn("steam_id")?.getFilterValue() as string) ?? ""
+            (table.getColumn("target_steam_id")?.getFilterValue() as string) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("steam_id")?.setFilterValue(event.target.value)
+            table.getColumn("target_steam_id")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
