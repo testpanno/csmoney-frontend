@@ -1,8 +1,8 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
-import { ISteamAuth } from "@/types"
+import { ArrowUpDown } from "lucide-react"
+import { ISteamAuth } from "@/services/steam_auth/steam_auth.types"
 import { Button } from "@/components/ui/button"
 
 export const columns: ColumnDef<ISteamAuth>[] = [

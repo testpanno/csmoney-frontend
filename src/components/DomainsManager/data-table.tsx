@@ -23,7 +23,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { DataTablePagination } from "../DataTablePagination/DataTablePagination";
+import { DataTablePagination } from "../ui/DataTablePagination/DataTablePagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -56,12 +56,10 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Поиск по steamid64..."
-          value={
-            (table.getColumn("target_steam_id")?.getFilterValue() as string) ?? ""
-          }
+          placeholder="Поиск по названию..."
+          value={(table.getColumn("domain_name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("target_steam_id")?.setFilterValue(event.target.value)
+            table.getColumn("domain_name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

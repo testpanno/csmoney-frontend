@@ -1,5 +1,5 @@
 import { instance } from '@/api/axios'
-import { ISteamLog } from '@/types'
+import { ISteamLog } from './steam_logs.types'
 
 class SteamLogsService {
     async getLast(){

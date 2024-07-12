@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/dialog";
 import { useBotMutations } from "@/hooks/useBotMutations";
 import { ICreateBot } from "@/services/bot/bot.types";
-import { Field } from "../field/Field";
+import { Field } from "../ui/field/Field";
 import { useToast } from "@/hooks/useToast";
-import { Loader } from "../loader/Loader";
+import { Loader } from "../ui/loader/Loader";
 
 export const BotCreateForm = () => {
   const { createBot, isCreatePending } = useBotMutations();

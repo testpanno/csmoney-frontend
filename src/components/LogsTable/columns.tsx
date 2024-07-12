@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { ISteamLog } from "@/types";
+import { ISteamLog } from "@/services/steam_logs/steam_logs.types"
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Badge } from "../badge";
+import { Badge } from "../ui/badge";
 
 interface ISkinItem {
   appid: number;

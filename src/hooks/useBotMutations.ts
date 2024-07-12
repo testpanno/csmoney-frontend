@@ -3,7 +3,6 @@ import SteamBotService from "@/services/bot/bot.service";
 import { ICreateBot } from "@/services/bot/bot.types";
 import { useToast } from "@/hooks/useToast";
 
-
 export const useBotMutations = () => {
   const queryClient = useQueryClient();
 

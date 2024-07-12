@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 interface HeadingProps {
   title: string;
-  description: string;
+  description?: string;
 }
 
 export const Heading: FC<HeadingProps> = ({ title, description }) => {

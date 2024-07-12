@@ -5,8 +5,9 @@ import { Loader } from "@/components/ui/loader/Loader";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { IBotResponse } from "@/services/bot/bot.types";
-import { useBotMutations } from '@/hooks/useBotMutations';
+import { useBotMutations } from "@/hooks/useBotMutations";
 import { BotCreateForm } from "./BotCreateForm";
+import { Heading } from "../ui/heading";
 
 export default function BotManager() {
   const {
@@ -20,7 +21,7 @@ export default function BotManager() {
     queryFn: () => BotService.getAll(),
   });
 
-  const {createBot, isCreatePending} = useBotMutations()
+  const { createBot, isCreatePending } = useBotMutations();
 
   if (botsError) return <div>Error: {botsError.message}</div>;
 
@@ -28,20 +29,22 @@ export default function BotManager() {
 
   return (
     <div className="container mx-auto py-10">
-      <div className="flex justify-end mb-4">
-        <Button variant="outline" onClick={() => refetchBotsData()}>
-          {isBotsFetching ? <Loader size="sm" /> : "Обновить Ботов"}
-        </Button>
-        <BotCreateForm></BotCreateForm>
+      <div className="flex justify-between mb-4">
+        <Heading title="Боты"></Heading>
+        <div className="flex">
+          <Button variant="outline" onClick={() => refetchBotsData()}>
+            {isBotsFetching ? <Loader size="sm" /> : "Обновить Ботов"}
+          </Button>
+          <BotCreateForm></BotCreateForm>
+        </div>
       </div>
       {isBotsLoading ? (
         <div className="w-full flex items-center justify-center">
           <Loader />
         </div>
       ) : (
-
         <DataTable columns={columns} data={BotData} />
       )}
     </div>
   );
-} 
+}

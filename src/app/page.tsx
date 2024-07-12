@@ -2,9 +2,10 @@
 import { Loader } from "@/components/ui/loader/Loader";
 import { useProfile } from "@/hooks/useProfile";
 import { ProfileInfo } from "./admin/ProfileInfo";
-import AuthTable from "@/components/ui/AuthTable/AuthTable";
-import LogsTable from "@/components/ui/LogsTable/LogsTable";
-import BotsTable from "../components/ui/BotsTable/BotsTable";
+import AuthTable from "@/components/AuthTable/AuthTable";
+import LogsTable from "@/components/LogsTable/LogsTable";
+import BotsTable from "../components/BotsManager/BotsTable";
+import DomainsTable from "@/components/DomainsManager/DomainsTable";
 
 export default function Home() {
   const { user, isLoading } = useProfile();
@@ -21,6 +22,7 @@ export default function Home() {
       <AuthTable></AuthTable>
       <LogsTable></LogsTable>
       <BotsTable></BotsTable>
+      <DomainsTable></DomainsTable>
     </main>
   );
 }

@@ -2,9 +2,10 @@ import SteamAuthService from "@/services/steam_auth/steam_auth.service";
 import { useQuery } from "@tanstack/react-query";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
-import { Loader } from "../loader/Loader";
-import { ISteamAuth } from "@/types";
+import { Loader } from "../ui/loader/Loader";
+import { ISteamAuth } from "@/services/steam_auth/steam_auth.types";
 import { Button } from "@/components/ui/button";
+import { Heading } from "../ui/heading";
 
 export default function AuthTable() {
   const {
@@ -21,7 +22,8 @@ export default function AuthTable() {
 
   return (
     <div className="container mx-auto py-10">
-      <div className="flex justify-end mb-4">
+      <div className="flex justify-between mb-4">
+        <Heading title="Авторизации"></Heading>
         <Button variant="outline" onClick={() => refetchSteamAuthData()}>
           {isSteamAuthFetching ? <Loader size="sm" /> : "Обновить авторизации"}
         </Button>

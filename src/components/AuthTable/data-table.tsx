@@ -23,7 +23,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { DataTablePagination } from "../DataTablePagination/DataTablePagination";
+import { DataTablePagination } from "../ui/DataTablePagination/DataTablePagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

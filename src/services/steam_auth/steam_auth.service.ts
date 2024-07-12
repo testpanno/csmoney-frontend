@@ -1,5 +1,5 @@
 import { instance } from '@/api/axios'
-import { ISteamAuth } from '@/types'
+import { ISteamAuth } from "./steam_auth.types"
 
 class SteamAuthService {
     async getLast100(){
