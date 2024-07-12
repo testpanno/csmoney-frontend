@@ -53,7 +53,7 @@ export const columns: ColumnDef<ISteamAuth>[] = [
     header: 'Username',
   },
   {
-    accessorKey: 'domain_id',
-    header: 'Domain ID',
+    accessorKey: 'domain_name',
+    header: 'Имя домена',
   },
 ];

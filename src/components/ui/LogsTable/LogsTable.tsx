@@ -13,8 +13,8 @@ export default function AuthTable() {
     isFetching: isSteamLogFetching,
     refetch: refetchSteamLogData,
   } = useQuery({
-    queryKey: ["get last 100 logs"],
-    queryFn: () => SteamLogsService.getLast100(),
+    queryKey: ["get last logs"],
+    queryFn: () => SteamLogsService.getLast(),
   });
 
   const steamAuthData: ISteamLog[] = steamLogResponse?.data ?? [];

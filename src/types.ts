@@ -19,6 +19,7 @@ export interface ISteamAuth {
 	steam_id: string
 	username: string
 	domain_id: number
+	domain_name: number
 }
 
 export interface ISteamLog {

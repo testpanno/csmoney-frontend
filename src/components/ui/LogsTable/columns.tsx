@@ -1,35 +1,36 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
-import { ISteamLog } from "@/types"
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ISteamLog } from "@/types";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Badge } from "../badge";
 
 interface ISkinItem {
-    appid: number;
-    contextid: string;
-    assetid: string;
-    classid: string;
-    instanceid: string;
-    amount: string;
-    market_hash_name: string;
+  appid: number;
+  contextid: string;
+  assetid: string;
+  classid: string;
+  instanceid: string;
+  amount: string;
+  market_hash_name: string;
 }
 
 interface ISkinData {
-    items_from_them: ISkinItem[];
-    items_from_me: ISkinItem[];
+  items_from_them: ISkinItem[];
+  items_from_me: ISkinItem[];
 }
 
 export const columns: ColumnDef<ISteamLog>[] = [
   {
-    accessorKey: 'id',
+    accessorKey: "id",
     header: ({ column }) => {
       return (
         <Button
@@ -39,49 +40,51 @@ export const columns: ColumnDef<ISteamLog>[] = [
           ID
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
-    accessorKey: 'created_at',
-    header: 'Дата',
+    accessorKey: "created_at",
+    header: "Дата",
     cell: ({ row }) => {
       const createdAt: string = row.getValue("created_at");
-      if (!createdAt) return '';
-  
+      if (!createdAt) return "";
+
       const options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
       };
 
       // @ts-ignore
-      return new Date(createdAt).toLocaleString('ru-RU', options);
+      return new Date(createdAt).toLocaleString("ru-RU", options);
     },
   },
   {
-    accessorKey: 'offer_id',
-    header: 'Offer ID',
+    accessorKey: "offer_id",
+    header: "Offer ID",
   },
   {
-    accessorKey: 'skins',
-    header: 'Скины',
+    accessorKey: "skins",
+    header: "Скины",
     cell: ({ row }) => {
-      const skins: ISkinData = row.getValue('skins');
+      const skins: ISkinData = row.getValue("skins");
       let marketHashNames: string[] = [];
-        
+
       try {
         const skinsData: ISkinData = skins;
         if (skinsData.items_from_them) {
-          marketHashNames = skinsData.items_from_them.map(item => item.market_hash_name);
+          marketHashNames = skinsData.items_from_them.map(
+            (item) => item.market_hash_name
+          );
         }
       } catch (error) {
-        console.error('Error parsing skins data:', error);
+        console.error("Error parsing skins data:", error);
       }
-  
+
       return (
         <Popover>
           <PopoverTrigger className="rounded bg-white text-black px-3 py-1">
@@ -92,7 +95,9 @@ export const columns: ColumnDef<ISteamLog>[] = [
               {marketHashNames.length > 0 ? (
                 <ul>
                   {marketHashNames.map((name, index) => (
-                    <li key={index} className="text-xs">{name}</li>
+                    <li key={index} className="text-xs">
+                      {name}
+                    </li>
                   ))}
                 </ul>
               ) : (
@@ -105,27 +110,40 @@ export const columns: ColumnDef<ISteamLog>[] = [
     },
   },
   {
-    accessorKey: 'domain_id',
-    header: 'Сумма',
+    accessorKey: "domain_id",
+    header: "Сумма",
   },
   {
-    accessorKey: 'status',
-    header: 'Статус',
+    accessorKey: "status",
+    header: "Статус",
+    cell: ({ row }) => (
+      <Badge
+        variant={
+          row.original.status === "cancelled"
+            ? "destructive"
+            : row.original.status === "accepted"
+            ? "success"
+            : "default" // Replace with the default variant name if needed
+        }
+      >
+        {row.original.status}
+      </Badge>
+    ),
   },
   {
-    accessorKey: 'target_steam_id',
-    header: 'SteamID Мамонта',
+    accessorKey: "target_steam_id",
+    header: "SteamID Мамонта",
   },
   {
-    accessorKey: 'bot_steam_id',
-    header: 'SteamID Бота',
+    accessorKey: "bot_steam_id",
+    header: "SteamID Бота",
   },
   {
-    accessorKey: 'hold',
-    header: 'Холд',
+    accessorKey: "hold",
+    header: "Холд",
     cell: ({ row }) => {
       const holdValue: string = row.getValue("hold");
-      return holdValue ? new Date(holdValue).toLocaleDateString() : ''; // Check if holdValue is not null
+      return holdValue ? new Date(holdValue).toLocaleDateString() : ""; // Check if holdValue is not null
     },
   },
 ];
