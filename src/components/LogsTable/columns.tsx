@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import { ISteamLog } from "@/services/steam_logs/steam_logs.types"
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -110,7 +110,7 @@ export const columns: ColumnDef<ISteamLog>[] = [
     },
   },
   {
-    accessorKey: "domain_id",
+    accessorKey: "total_price",
     header: "Сумма",
   },
   {

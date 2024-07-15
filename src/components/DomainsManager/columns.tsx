@@ -7,7 +7,6 @@ import { IDomainResponse } from "@/services/domain/domain.types";
 import { useDomainMutations } from "@/hooks/useDomainMutations";
 import { Loader } from "@/components/ui/loader/Loader";
 import { DomainCreateForm } from "./DomainCreateForm";
-import { useState } from "react";
 
 export const columns: ColumnDef<IDomainResponse>[] = [
   {
