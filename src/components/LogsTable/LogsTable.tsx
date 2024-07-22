@@ -6,34 +6,28 @@ import { Loader } from "../ui/loader/Loader";
 import { ISteamLog } from "@/services/steam_logs/steam_logs.types";
 import { Button } from "@/components/ui/button";
 import { Heading } from "../ui/heading";
+import { useLogs } from "@/hooks/useLogs";
+
 
 export default function AuthTable() {
-  const {
-    data: steamLogResponse,
-    isLoading: isSteamLogLoading,
-    isFetching: isSteamLogFetching,
-    refetch: refetchSteamLogData,
-  } = useQuery({
-    queryKey: ["get last logs"],
-    queryFn: () => SteamLogsService.getLast(),
-  });
 
-  const steamAuthData: ISteamLog[] = steamLogResponse?.data ?? [];
+  const { logs, isLogsFetching, refetchLogsData} = useLogs()
+
 
   return (
     <div className="container mx-auto py-10">
       <div className="flex justify-between mb-4">
       <Heading title="Логи"></Heading>
-        <Button variant="outline" onClick={() => refetchSteamLogData()}>
-          {isSteamLogFetching ? <Loader size="sm" /> : "Обновить Логи"}
+        <Button variant="outline" onClick={() => refetchLogsData()}>
+          {isLogsFetching ? <Loader size="sm" /> : "Обновить Логи"}
         </Button>
       </div>
-      {isSteamLogLoading ? (
+      {isLogsFetching ? (
         <div className="w-full flex items-center justify-center">
           <Loader />
         </div>
       ) : (
-        <DataTable columns={columns} data={steamAuthData} />
+        <DataTable columns={columns} data={logs} />
       )}
     </div>
   );
