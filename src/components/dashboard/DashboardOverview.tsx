@@ -123,6 +123,9 @@ export default function DashboardOverview() {
                                 <div className="text-sm text-muted-foreground">
                                   BOT: {item.bot_steam_id}
                                 </div>
+                                <div className="text-sm text-muted-foreground">
+                                  {new Date(item.created_at).toLocaleString("ru-RU", {})}
+                                </div>
                               </div>
                             </div>
                           </TableCell>

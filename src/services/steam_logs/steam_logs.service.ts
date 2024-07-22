@@ -7,7 +7,7 @@ class SteamLogsService {
     }
 
     async getLastAccepted() {
-        return instance.get<ISteamLog[]>(`/admin/logs/filter?status=accepted&limit=5&page=1`)
+        return instance.get<ISteamLog[]>(`/admin/logs/filter?status=accepted&limit=4&page=1`)
     }
 
     async getTotalPriceOfAcceptedLogs() {
